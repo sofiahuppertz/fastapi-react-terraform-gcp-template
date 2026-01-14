@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle, faSpinner, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { text, palettes } from '@/theme/irisGarden';
+import { text, palettes } from '@/theme/colors';
 import { CancelButton, SaveButton } from '@/components/buttons';
 
 interface ValidationModalProps {
@@ -42,7 +42,7 @@ const ValidationModal: React.FC<ValidationModalProps> = ({
           <FontAwesomeIcon 
             icon={icon} 
             className="h-5 w-5 mr-3"
-            style={{ color: palettes.lilac.lilac3 }}
+            style={{ color: palettes.primary[3] }}
           />
           <h3 
             className="text-lg font-heading"

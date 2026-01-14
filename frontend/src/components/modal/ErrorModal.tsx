@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { palettes, text, semantic } from '@/theme/irisGarden';
+import { palettes, text, colors } from '@/theme/colors';
 import { CancelButton } from '../buttons/CancelButton';
 
 interface ErrorModalProps {
@@ -33,8 +33,8 @@ const ErrorModal: React.FC<ErrorModalProps> = ({
             <div
               className="h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0"
               style={{
-                backgroundColor: palettes.warning.warning0 + '50',
-                color: semantic.warning
+                backgroundColor: palettes.warning[0] + '50',
+                color: colors.warning
               }}
             >
               <FontAwesomeIcon icon={faExclamationTriangle} className="h-5 w-5" />

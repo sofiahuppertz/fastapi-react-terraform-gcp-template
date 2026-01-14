@@ -1,4 +1,4 @@
-import { palettes } from '@/theme/irisGarden';
+import { palettes } from '@/theme/colors';
 
 /**
  * Shared styling constants for list items (Resources and Molecules)
@@ -8,11 +8,11 @@ export const LIST_ITEM_STYLES = {
   iconSize: 'h-3 w-3',
   iconSizeSmall: 'h-3 w-3',
   avatarSize: 'w-14 h-14',
-  
+
   // Colors
-  iconColor: palettes.lilac.lilac0  ,
+  iconColor: palettes.primary[0],
   borderColor: 'transparent',
-  avatarBackground: palettes.lilac.lilac0 + '50',
+  avatarBackground: palettes.primary[0] + '50',
   
   // Typography
   fontSize: 'text-base',

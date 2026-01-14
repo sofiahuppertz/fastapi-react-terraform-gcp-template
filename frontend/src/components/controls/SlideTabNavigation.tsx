@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { palettes, border, primary } from '@/theme/irisGarden';
+import { palettes, border, colors } from '@/theme/colors';
 
 export interface TabItem {
   key: string;
@@ -31,11 +31,11 @@ const SlideTabNavigation: React.FC<SlideTabNavigationProps> = ({
   onTabClick,
   className = '',
   colorScheme = {
-    background: palettes.sage.sage0 + '90',
-    border: border.sage,
-    activeBackground: primary.sage,
-    activeText: palettes.sage.sage0,
-    inactiveText: palettes.sage.sage6,
+    background: palettes.secondary[0] + '90',
+    border: border.secondary,
+    activeBackground: colors.secondary,
+    activeText: palettes.secondary[0],
+    inactiveText: palettes.secondary[6],
   }
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);

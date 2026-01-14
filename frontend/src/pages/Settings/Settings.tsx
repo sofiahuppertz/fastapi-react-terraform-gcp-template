@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock, faEye, faEyeSlash, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { text, palettes, primary, semantic } from '../config/colors';
-import { authService } from '../services';
-import { toast } from '../components/toast.ts';
-import Breadcrumb from '../components/ui/Breadcrumb';
+import { faLock, faEye, faEyeSlash, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { text, palettes, colors } from '@/theme/colors';
+import { authClient } from '../../services/auth/authClient';
+import Breadcrumb from '../../components/controls/Breadcrumb';
+import { useError } from '@/hooks/useError';
 
 export function Settings() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -14,9 +14,7 @@ export function Settings() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-
-  const userEmail = localStorage.getItem('user_email') || '';
-  const isSuperuser = localStorage.getItem('is_superuser') === 'true';
+  const { showError } = useError();
 
   const isFormValid = () => {
     if (!currentPassword.trim() || !newPassword.trim() || !confirmPassword.trim()) {
@@ -33,38 +31,28 @@ export function Settings() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!isFormValid()) {
-      toast.error('Please fill all fields correctly');
+      showError('Validation Error', 'Please fill all fields correctly');
       return;
     }
 
     setSubmitting(true);
 
     try {
-      const token = localStorage.getItem('access_token');
-      if (!token) {
-        toast.error('Please log in to update password');
-        return;
-      }
+      await authClient.updatePassword({
+        current_password: currentPassword,
+        new_password: newPassword,
+      });
 
-      await authService.updatePassword(
-        {
-          current_password: currentPassword,
-          new_password: newPassword,
-        },
-        token
-      );
-
-      toast.success('Password updated successfully');
-      
-      // Reset form
+      // Reset form on success
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
-    } catch (error: any) {
-      console.error('Failed to update password:', error);
-      toast.error(error.message || 'Failed to update password');
+      alert('Password updated successfully');
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to update password';
+      showError('Error', message);
     } finally {
       setSubmitting(false);
     }
@@ -76,132 +64,49 @@ export function Settings() {
       <div className="flex items-center justify-between flex-shrink-0 mb-8">
         <Breadcrumb
           items={[
-            { label: 'Profile', isActive: true },
+            { label: 'Settings', fontWeight: 'medium', color: text.primary },
           ]}
         />
       </div>
 
-      <div className="max-w-3xl mx-auto space-y-6">
-        {/* User Info Card */}
-        <div
-          className="rounded-2xl border shadow-sm p-8"
-          style={{
-            borderColor: palettes.sky.sky1,
-            backgroundColor: 'white',
-          }}
-        >
-          <div className="flex items-center space-x-4 mb-6">
-            <div
-              className="h-16 w-16 rounded-full flex items-center justify-center"
-              style={{
-                backgroundColor: palettes.sky.sky0,
-                color: primary.sky,
-              }}
-            >
-              <FontAwesomeIcon icon={faUser} className="h-8 w-8" />
-            </div>
-            <div>
-              <h2
-                className="text-2xl font-semibold font-space"
-                style={{ color: text.primary }}
-              >
-                User Information
-              </h2>
-              <p
-                className="text-sm font-satoshi mt-1"
-                style={{ color: text.subtle }}
-              >
-                View your account details
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div>
-              <label
-                className="block text-sm font-medium mb-2 font-space"
-                style={{ color: text.secondary }}
-              >
-                Email Address
-              </label>
-              <div
-                className="px-4 py-3 rounded-xl border font-mono"
-                style={{
-                  borderColor: palettes.sky.sky1,
-                  backgroundColor: palettes.sky.sky0 + '30',
-                  color: text.primary,
-                }}
-              >
-                {userEmail}
-              </div>
-            </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium mb-2 font-space"
-                style={{ color: text.secondary }}
-              >
-                Account Type
-              </label>
-              <div className="flex items-center space-x-2">
-                <span
-                  className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border font-space"
-                  style={{
-                    backgroundColor: isSuperuser ? palettes.purple.purple0 : palettes.sky.sky0,
-                    color: isSuperuser ? palettes.purple.purple4 : palettes.sky.sky4,
-                    borderColor: isSuperuser ? palettes.purple.purple2 : palettes.sky.sky2,
-                  }}
-                >
-                  {isSuperuser ? 'Administrator' : 'Standard User'}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div className="max-w-xl">
         {/* Change Password Card */}
         <div
           className="rounded-2xl border shadow-sm p-8"
           style={{
-            borderColor: palettes.teal.teal1,
+            borderColor: palettes.primary[1],
             backgroundColor: 'white',
           }}
         >
           <div className="flex items-center space-x-4 mb-6">
             <div
-              className="h-16 w-16 rounded-full flex items-center justify-center"
+              className="h-12 w-12 rounded-full flex items-center justify-center"
               style={{
-                backgroundColor: palettes.teal.teal0,
-                color: primary.teal,
+                backgroundColor: palettes.primary[0],
+                color: colors.primary,
               }}
             >
-              <FontAwesomeIcon icon={faLock} className="h-8 w-8" />
+              <FontAwesomeIcon icon={faLock} className="h-6 w-6" />
             </div>
             <div>
-              <h2
-                className="text-2xl font-semibold font-space"
-                style={{ color: text.primary }}
-              >
+              <h2 className="text-xl font-semibold" style={{ color: text.primary }}>
                 Change Password
               </h2>
-              <p
-                className="text-sm font-satoshi mt-1"
-                style={{ color: text.subtle }}
-              >
+              <p className="text-sm mt-1" style={{ color: text.subtle }}>
                 Update your password to keep your account secure
               </p>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {/* Current Password */}
             <div>
               <label
                 htmlFor="current-password"
-                className="block text-sm font-medium mb-2 font-space"
+                className="block text-sm font-medium mb-2"
                 style={{ color: text.primary }}
               >
-                Current Password <span style={{ color: semantic.danger }}>*</span>
+                Current Password <span style={{ color: colors.danger }}>*</span>
               </label>
               <div className="relative">
                 <input
@@ -209,17 +114,15 @@ export function Settings() {
                   id="current-password"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
-                  className="w-full px-4 py-3 pr-12 border rounded-xl focus:ring-2 focus:border-transparent transition-all duration-200 font-satoshi"
-                  style={{
-                    borderColor: palettes.teal.teal1,
-                  }}
+                  className="w-full px-4 py-3 pr-12 border rounded-xl focus:outline-none transition-all duration-200"
+                  style={{ borderColor: palettes.primary[1] }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = palettes.teal.teal2;
-                    e.currentTarget.style.outline = `2px solid ${palettes.teal.teal0}`;
+                    e.currentTarget.style.borderColor = palettes.primary[2];
+                    e.currentTarget.style.boxShadow = `0 0 0 2px ${palettes.primary[0]}`;
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = palettes.teal.teal1;
-                    e.currentTarget.style.outline = 'none';
+                    e.currentTarget.style.borderColor = palettes.primary[1];
+                    e.currentTarget.style.boxShadow = 'none';
                   }}
                   placeholder="Enter your current password"
                   required
@@ -229,14 +132,8 @@ export function Settings() {
                 <button
                   type="button"
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg transition-colors duration-200"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg"
                   style={{ color: text.subtle }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = text.primary;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = text.subtle;
-                  }}
                 >
                   <FontAwesomeIcon icon={showCurrentPassword ? faEyeSlash : faEye} className="h-4 w-4" />
                 </button>
@@ -247,10 +144,10 @@ export function Settings() {
             <div>
               <label
                 htmlFor="new-password"
-                className="block text-sm font-medium mb-2 font-space"
+                className="block text-sm font-medium mb-2"
                 style={{ color: text.primary }}
               >
-                New Password <span style={{ color: semantic.danger }}>*</span>
+                New Password <span style={{ color: colors.danger }}>*</span>
               </label>
               <div className="relative">
                 <input
@@ -258,17 +155,15 @@ export function Settings() {
                   id="new-password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full px-4 py-3 pr-12 border rounded-xl focus:ring-2 focus:border-transparent transition-all duration-200 font-satoshi"
-                  style={{
-                    borderColor: palettes.teal.teal1,
-                  }}
+                  className="w-full px-4 py-3 pr-12 border rounded-xl focus:outline-none transition-all duration-200"
+                  style={{ borderColor: palettes.primary[1] }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = palettes.teal.teal2;
-                    e.currentTarget.style.outline = `2px solid ${palettes.teal.teal0}`;
+                    e.currentTarget.style.borderColor = palettes.primary[2];
+                    e.currentTarget.style.boxShadow = `0 0 0 2px ${palettes.primary[0]}`;
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = palettes.teal.teal1;
-                    e.currentTarget.style.outline = 'none';
+                    e.currentTarget.style.borderColor = palettes.primary[1];
+                    e.currentTarget.style.boxShadow = 'none';
                   }}
                   placeholder="Enter new password (8-72 characters)"
                   required
@@ -280,20 +175,14 @@ export function Settings() {
                 <button
                   type="button"
                   onClick={() => setShowNewPassword(!showNewPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg transition-colors duration-200"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg"
                   style={{ color: text.subtle }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = text.primary;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = text.subtle;
-                  }}
                 >
                   <FontAwesomeIcon icon={showNewPassword ? faEyeSlash : faEye} className="h-4 w-4" />
                 </button>
               </div>
-              <p className="text-xs mt-1 font-satoshi" style={{ color: text.subtle }}>
-                Password must be between 8 and 72 characters long
+              <p className="text-xs mt-1" style={{ color: text.subtle }}>
+                Password must be between 8 and 72 characters
               </p>
             </div>
 
@@ -301,10 +190,10 @@ export function Settings() {
             <div>
               <label
                 htmlFor="confirm-password"
-                className="block text-sm font-medium mb-2 font-space"
+                className="block text-sm font-medium mb-2"
                 style={{ color: text.primary }}
               >
-                Confirm New Password <span style={{ color: semantic.danger }}>*</span>
+                Confirm New Password <span style={{ color: colors.danger }}>*</span>
               </label>
               <div className="relative">
                 <input
@@ -312,17 +201,15 @@ export function Settings() {
                   id="confirm-password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-3 pr-12 border rounded-xl focus:ring-2 focus:border-transparent transition-all duration-200 font-satoshi"
-                  style={{
-                    borderColor: palettes.teal.teal1,
-                  }}
+                  className="w-full px-4 py-3 pr-12 border rounded-xl focus:outline-none transition-all duration-200"
+                  style={{ borderColor: palettes.primary[1] }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = palettes.teal.teal2;
-                    e.currentTarget.style.outline = `2px solid ${palettes.teal.teal0}`;
+                    e.currentTarget.style.borderColor = palettes.primary[2];
+                    e.currentTarget.style.boxShadow = `0 0 0 2px ${palettes.primary[0]}`;
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = palettes.teal.teal1;
-                    e.currentTarget.style.outline = 'none';
+                    e.currentTarget.style.borderColor = palettes.primary[1];
+                    e.currentTarget.style.boxShadow = 'none';
                   }}
                   placeholder="Confirm your new password"
                   required
@@ -332,20 +219,14 @@ export function Settings() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg transition-colors duration-200"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg"
                   style={{ color: text.subtle }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = text.primary;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = text.subtle;
-                  }}
                 >
                   <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} className="h-4 w-4" />
                 </button>
               </div>
               {newPassword && confirmPassword && newPassword !== confirmPassword && (
-                <p className="text-xs mt-1 font-satoshi" style={{ color: semantic.danger }}>
+                <p className="text-xs mt-1" style={{ color: colors.danger }}>
                   Passwords do not match
                 </p>
               )}
@@ -356,19 +237,19 @@ export function Settings() {
               <button
                 type="submit"
                 disabled={submitting || !isFormValid()}
-                className="w-full px-6 py-3 rounded-xl font-medium font-space transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-6 py-3 rounded-xl font-medium transition-all duration-200 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
-                  backgroundColor: primary.teal,
+                  backgroundColor: colors.primary,
                   color: 'white',
                 }}
                 onMouseEnter={(e) => {
                   if (!submitting && isFormValid()) {
-                    e.currentTarget.style.backgroundColor = palettes.teal.teal3;
+                    e.currentTarget.style.backgroundColor = palettes.primary[4];
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!submitting && isFormValid()) {
-                    e.currentTarget.style.backgroundColor = primary.teal;
+                    e.currentTarget.style.backgroundColor = colors.primary;
                   }
                 }}
               >
@@ -382,4 +263,3 @@ export function Settings() {
     </div>
   );
 }
-

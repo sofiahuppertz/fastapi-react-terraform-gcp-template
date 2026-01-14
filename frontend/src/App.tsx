@@ -1,32 +1,31 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { Auth } from './components/Auth';
-import { Layout } from './components/Layout';
-import { Home } from './pages/Home.tsx';
-import { Settings } from './pages/Settings.tsx';
+import { AuthProvider } from './context/AuthContext';
+import { ErrorProvider } from './context/ErrorContext';
+import { useAuth } from './hooks/useAuth';
+import AuthPage from './pages/Auth/Auth';
+import ForgotPasswordPage from './pages/Auth/ForgotPasswordPage';
+import Layout from './components/layout/Layout';
+import { Home } from './pages/Home/Home';
+import { Settings } from './pages/Settings/Settings';
+import { tokenManager } from './services/core/tokenManager';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, loading } = useAuth();
+  const { user } = useAuth();
+  const hasTokens = tokenManager.hasTokens();
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return <Auth />;
+  // If no user and no tokens, redirect to auth
+  if (!user && !hasTokens) {
+    return <Navigate to="/auth" replace />;
   }
 
   return <>{children}</>;
 }
 
-
 function AppRoutes() {
   return (
     <Routes>
+      <Route path="/auth" element={<AuthPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route
         path="/"
         element={
@@ -36,8 +35,7 @@ function AppRoutes() {
         }
       >
         <Route index element={<Home />} />
-        <Route path="profile" element={<Settings />} />
-
+        <Route path="settings" element={<Settings />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
@@ -48,7 +46,9 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <AppRoutes />
+        <ErrorProvider>
+          <AppRoutes />
+        </ErrorProvider>
       </AuthProvider>
     </BrowserRouter>
   );

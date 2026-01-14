@@ -1,5 +1,5 @@
 import React from 'react';
-import { text, palettes } from '@/theme/irisGarden';
+import { text, palettes } from '@/theme/colors';
 
 export interface BreadcrumbItem {
   label: string;
@@ -37,7 +37,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' }) => {
                   } ${
                     item.fontWeight === 'medium' ? 'font-medium' : ''
                   }`}
-                  style={{ color: item.color || palettes.lilac.lilac0 }}
+                  style={{ color: item.color || palettes.primary[0] }}
                 >
                   {item.label}
                 </button>

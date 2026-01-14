@@ -1,5 +1,5 @@
 import React from 'react';
-import { palettes } from '@/theme/irisGarden';
+import { palettes } from '@/theme/colors';
 
 interface ListSkeletonProps {
   columns?: 1 | 2;
@@ -19,7 +19,7 @@ const ListSkeleton: React.FC<ListSkeletonProps> = ({ columns = 1, count = 8 }) =
               className="rounded-full shadow-sm border mb-2 p-4"
               style={{ 
                 backgroundColor: 'white',
-                borderColor: palettes.grey.grey0 + '50'
+                borderColor: palettes.neutral[0] + '50'
               }}
             >
               <div className="flex items-center justify-between">
@@ -30,7 +30,7 @@ const ListSkeleton: React.FC<ListSkeletonProps> = ({ columns = 1, count = 8 }) =
                       className="h-5 rounded-full shimmer" 
                       style={{ 
                         width: '180px',
-                        backgroundColor: palettes.grey.grey0
+                        backgroundColor: palettes.neutral[0]
                       }}
                     ></div>
                   </div>
@@ -39,22 +39,22 @@ const ListSkeleton: React.FC<ListSkeletonProps> = ({ columns = 1, count = 8 }) =
                     <div className="flex items-center space-x-2 w-20 justify-center">
                       <div 
                         className="h-4 w-4 rounded-full shimmer"
-                        style={{ backgroundColor: palettes.grey.grey1 }}
+                        style={{ backgroundColor: palettes.neutral[1] }}
                       ></div>
                       <div 
                         className="h-4 w-12 rounded-full shimmer"
-                        style={{ backgroundColor: palettes.grey.grey0 }}
+                        style={{ backgroundColor: palettes.neutral[0] }}
                       ></div>
                     </div>
                     {/* Retention time skeleton */}
                     <div className="flex items-center space-x-1 w-16 justify-center">
                       <div 
                         className="h-3 w-3 rounded-full shimmer"
-                        style={{ backgroundColor: palettes.grey.grey1 }}
+                        style={{ backgroundColor: palettes.neutral[1] }}
                       ></div>
                       <div 
                         className="h-4 w-8 rounded-full shimmer"
-                        style={{ backgroundColor: palettes.grey.grey0 }}
+                        style={{ backgroundColor: palettes.neutral[0] }}
                       ></div>
                     </div>
                   </div>
@@ -63,7 +63,7 @@ const ListSkeleton: React.FC<ListSkeletonProps> = ({ columns = 1, count = 8 }) =
                   {/* Action button skeleton */}
                   <div 
                     className="w-8 h-8 rounded-full shimmer"
-                    style={{ backgroundColor: palettes.grey.grey1 }}
+                    style={{ backgroundColor: palettes.neutral[1] }}
                   ></div>
                 </div>
               </div>

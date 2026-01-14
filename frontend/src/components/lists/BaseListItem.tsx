@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { palettes } from '@/theme/irisGarden';
+import { palettes } from '@/theme/colors';
 
 interface BaseListItemProps {
   leftContent: React.ReactNode;
@@ -43,28 +43,28 @@ const BaseListItem: React.FC<BaseListItemProps> = ({
   const getBaseStyles = (): React.CSSProperties => {
     if (toDelete) {
       return {
-        backgroundColor: palettes.danger.danger2 + '50',
-        borderColor: palettes.danger.danger2 + '50',
+        backgroundColor: palettes.danger[2] + '50',
+        borderColor: palettes.danger[2] + '50',
       };
     }
-    
+
     if (isHighlighted) {
       return {
-        backgroundColor: palettes.lilac.lilac3 + '50',
-        borderColor: palettes.lilac.lilac3,
+        backgroundColor: palettes.primary[3] + '50',
+        borderColor: palettes.primary[3],
       };
     }
 
     if (isSelected) {
       return {
-        backgroundColor: palettes.sage.sage1 + '50',
-        borderColor: palettes.sage.sage1,
+        backgroundColor: palettes.secondary[1] + '50',
+        borderColor: palettes.secondary[1],
       };
     }
     // Default state
     return {
-      backgroundColor: palettes.grey.grey0 + '20',
-      borderColor: palettes.grey.grey0 + '20',
+      backgroundColor: palettes.neutral[0] + '20',
+      borderColor: palettes.neutral[0] + '20',
     };
   };
 
@@ -73,14 +73,14 @@ const BaseListItem: React.FC<BaseListItemProps> = ({
     if (toDelete || isHighlighted) {
       return {}; // Don't change on hover if already selected/highlighted
     }
-    
+
     if (isHovered) {
       return {
-        backgroundColor: palettes.lilac.lilac0 + '50',
-        borderColor: palettes.lilac.lilac1,
+        backgroundColor: palettes.primary[0] + '50',
+        borderColor: palettes.primary[1],
       };
     }
-    
+
     return {};
   };
 

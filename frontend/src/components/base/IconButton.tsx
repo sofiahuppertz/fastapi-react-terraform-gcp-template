@@ -2,7 +2,7 @@
 import React, { useState, CSSProperties } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { palettes, primary, semantic } from '@/theme/irisGarden';
+import { palettes, colors } from '@/theme/colors';
 
 export type IconButtonVariant = 
   | 'primary'     // Lilac
@@ -45,79 +45,79 @@ const getVariantColors = (variant: IconButtonVariant) => {
     case 'primary':
       return {
         default: {
-          backgroundColor: palettes.lilac.lilac0,
-          color: palettes.lilac.lilac2,
-          borderColor: palettes.lilac.lilac0
+          backgroundColor: palettes.primary[0],
+          color: palettes.primary[2],
+          borderColor: palettes.primary[0]
         },
         hover: {
-          backgroundColor: palettes.lilac.lilac2,
+          backgroundColor: palettes.primary[2],
           color: 'white',
-          borderColor: palettes.lilac.lilac2
+          borderColor: palettes.primary[2]
         }
       };
     case 'secondary':
       return {
         default: {
-          backgroundColor: palettes.sage.sage0,
-          color: palettes.sage.sage3,
-          borderColor: palettes.sage.sage0
+          backgroundColor: palettes.secondary[0],
+          color: palettes.secondary[3],
+          borderColor: palettes.secondary[0]
         },
         hover: {
-          backgroundColor: palettes.sage.sage3,
+          backgroundColor: palettes.secondary[3],
           color: 'white',
-          borderColor: palettes.sage.sage3
+          borderColor: palettes.secondary[3]
         }
       };
     case 'danger':
       return {
         default: {
-          backgroundColor: palettes.danger.danger0,
-          color: palettes.danger.danger2,
-          borderColor: palettes.danger.danger0
+          backgroundColor: palettes.danger[0],
+          color: palettes.danger[2],
+          borderColor: palettes.danger[0]
         },
         hover: {
-          backgroundColor: palettes.danger.danger2,
+          backgroundColor: palettes.danger[2],
           color: 'white',
-          borderColor: palettes.danger.danger2
+          borderColor: palettes.danger[2]
         }
       };
     case 'warning':
       return {
         default: {
-          backgroundColor: palettes.warning.warning0,
-          color: palettes.warning.warning2,
-          borderColor: palettes.warning.warning0
+          backgroundColor: palettes.warning[0],
+          color: palettes.warning[2],
+          borderColor: palettes.warning[0]
         },
         hover: {
-          backgroundColor: palettes.warning.warning2,
+          backgroundColor: palettes.warning[2],
           color: 'white',
-          borderColor: palettes.warning.warning2
+          borderColor: palettes.warning[2]
         }
       };
     case 'success':
       return {
         default: {
-          backgroundColor: palettes.success.success0,
-          color: palettes.success.success3,
-          borderColor: palettes.success.success0
+          backgroundColor: palettes.success[0],
+          color: palettes.success[3],
+          borderColor: palettes.success[0]
         },
         hover: {
-          backgroundColor: palettes.success.success2,
+          backgroundColor: palettes.success[2],
           color: 'white',
-          borderColor: palettes.success.success2
+          borderColor: palettes.success[2]
         }
       };
     case 'ghost':
       return {
         default: {
           backgroundColor: 'transparent',
-          color: palettes.lilac.lilac2,
+          color: palettes.primary[2],
           borderColor: 'transparent'
         },
         hover: {
-          backgroundColor: palettes.lilac.lilac2,
+          backgroundColor: palettes.primary[2],
           color: 'white',
-          borderColor: palettes.lilac.lilac2
+          borderColor: palettes.primary[2]
         }
       };
   }

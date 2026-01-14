@@ -1,6 +1,6 @@
 import {
   UserCreate,
-  UserResponse,
+  RegisterResponse,
   LoginFormData,
   LoginResponse,
   ActivationRequest,
@@ -8,7 +8,10 @@ import {
   ForgotPasswordRequest,
   ResetPasswordRequest,
   PasswordResetResponse,
-} from '../../types/auth';
+  PasswordUpdateRequest,
+  PasswordUpdateResponse,
+  MeResponse,
+} from '@/types/auth';
 import { HttpClient } from '../core/HTTPClient';
 
 export class AuthClient {
@@ -30,9 +33,9 @@ export class AuthClient {
     }
   }
 
-  public async register(userData: UserCreate): Promise<UserResponse> {
+  public async register(userData: UserCreate): Promise<RegisterResponse> {
     try {
-      return await this.httpClient.post<UserResponse>('/register', userData, { public: true });
+      return await this.httpClient.post<RegisterResponse>('/register', userData, { public: true });
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Registration failed';
       if (errorMessage.includes('409')) {
@@ -69,11 +72,19 @@ export class AuthClient {
     }
   }
 
-  async updatePassword(data: PasswordUpdateRequest, token: string): Promise<PasswordUpdateResponse | null> {
+  public async updatePassword(data: PasswordUpdateRequest): Promise<PasswordUpdateResponse> {
     try {
-        return await this.httpClient.put<PasswordResetResponse>('/password', data);
+      return await this.httpClient.put<PasswordUpdateResponse>('/password', data);
     } catch (error) {
-        throw new Error('Password reset failed');
+      throw new Error('Password update failed');
+    }
+  }
+
+  public async me(): Promise<MeResponse> {
+    try {
+      return await this.httpClient.get<MeResponse>('/me');
+    } catch (error) {
+      throw new Error('Failed to get user info');
     }
   }
 }

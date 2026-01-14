@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { palettes, text, semantic } from '@/theme/irisGarden';
+import { palettes, text, colors } from '@/theme/colors';
 import { DeleteButton, CancelButton } from '@/components/buttons';
 
 interface DeleteConfirmationModalProps {
@@ -35,15 +35,15 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
         className="rounded-xl p-6 max-w-md w-full mx-4 shadow-xl"
         style={{
           backgroundColor: 'white',
-          border: `1px solid ${palettes.lilac.lilac1}`
+          border: `1px solid ${palettes.primary[1]}`
         }}
       >
         <div className="flex items-center space-x-3 mb-4">
           <div 
             className="h-10 w-10 rounded-full flex items-center justify-center"
             style={{
-              backgroundColor: palettes.danger.danger0 + '50',
-              color: semantic.danger
+              backgroundColor: palettes.danger[0] + '50',
+              color: colors.danger
             }}
           >
             <FontAwesomeIcon icon={faExclamationTriangle} className="h-5 w-5" />

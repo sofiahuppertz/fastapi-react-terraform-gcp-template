@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { palettes, primary, semantic } from '@/theme/irisGarden';
+import { palettes, colors } from '@/theme/colors';
 
 export type ActionButtonVariant = 
   | 'primary'     // Main action (Lilac)
@@ -45,134 +45,134 @@ const getVariantColors = (variant: ActionButtonVariant, useOutline: boolean) => 
   const configs = {
     primary: {
       solid: {
-        backgroundColor: primary.lilac,
+        backgroundColor: colors.primary,
         color: 'white',
-        borderColor: primary.lilac
+        borderColor: colors.primary
       },
       hover: {
-        backgroundColor: palettes.lilac.lilac3,
+        backgroundColor: palettes.primary[4],
         color: 'white',
-        borderColor: palettes.lilac.lilac3
+        borderColor: palettes.primary[4]
       },
       outline: {
         backgroundColor: 'transparent',
-        color: primary.lilac,
-        borderColor: primary.lilac
+        color: colors.primary,
+        borderColor: colors.primary
       },
       outlineHover: {
-        backgroundColor: primary.lilac,
+        backgroundColor: colors.primary,
         color: 'white',
-        borderColor: primary.lilac
+        borderColor: colors.primary
       }
     },
     secondary: {
       solid: {
-        backgroundColor: primary.sage,
+        backgroundColor: colors.secondary,
         color: 'white',
-        borderColor: primary.sage
+        borderColor: colors.secondary
       },
       hover: {
-        backgroundColor: palettes.sage.sage3,
+        backgroundColor: palettes.secondary[4],
         color: 'white',
-        borderColor: palettes.sage.sage3
+        borderColor: palettes.secondary[4]
       },
       outline: {
         backgroundColor: 'transparent',
-        color: primary.sage,
-        borderColor: primary.sage
+        color: colors.secondary,
+        borderColor: colors.secondary
       },
       outlineHover: {
-        backgroundColor: primary.sage,
+        backgroundColor: colors.secondary,
         color: 'white',
-        borderColor: primary.sage
+        borderColor: colors.secondary
       }
     },
     danger: {
       solid: {
-        backgroundColor: semantic.danger,
+        backgroundColor: colors.danger,
         color: 'white',
-        borderColor: semantic.danger
+        borderColor: colors.danger
       },
       hover: {
-        backgroundColor: palettes.danger.danger3,
+        backgroundColor: palettes.danger[4],
         color: 'white',
-        borderColor: palettes.danger.danger3
+        borderColor: palettes.danger[4]
       },
       outline: {
         backgroundColor: 'transparent',
-        color: semantic.danger,
-        borderColor: semantic.danger
+        color: colors.danger,
+        borderColor: colors.danger
       },
       outlineHover: {
-        backgroundColor: semantic.danger,
+        backgroundColor: colors.danger,
         color: 'white',
-        borderColor: semantic.danger
+        borderColor: colors.danger
       }
     },
     warning: {
       solid: {
-        backgroundColor: palettes.warning.warning3,
+        backgroundColor: colors.warning,
         color: 'white',
-        borderColor: palettes.warning.warning3
+        borderColor: colors.warning
       },
       hover: {
-        backgroundColor: palettes.warning.warning4,
+        backgroundColor: palettes.warning[4],
         color: 'white',
-        borderColor: palettes.warning.warning4
+        borderColor: palettes.warning[4]
       },
       outline: {
         backgroundColor: 'transparent',
-        color: palettes.warning.warning3,
-        borderColor: palettes.warning.warning3
+        color: colors.warning,
+        borderColor: colors.warning
       },
       outlineHover: {
-        backgroundColor: palettes.warning.warning3,
+        backgroundColor: colors.warning,
         color: 'white',
-        borderColor: palettes.warning.warning3
+        borderColor: colors.warning
       }
     },
     success: {
       solid: {
-        backgroundColor: palettes.success.success3,
+        backgroundColor: colors.success,
         color: 'white',
-        borderColor: palettes.success.success3
+        borderColor: colors.success
       },
       hover: {
-        backgroundColor: palettes.success.success3,
+        backgroundColor: palettes.success[4],
         color: 'white',
-        borderColor: palettes.success.success3
+        borderColor: palettes.success[4]
       },
       outline: {
         backgroundColor: 'transparent',
-        color: palettes.success.success3,
-        borderColor: palettes.success.success3
+        color: colors.success,
+        borderColor: colors.success
       },
       outlineHover: {
-        backgroundColor: palettes.success.success3,
+        backgroundColor: colors.success,
         color: 'white',
-        borderColor: palettes.success.success3
+        borderColor: colors.success
       }
     },
     ghost: {
       solid: {
-        backgroundColor: palettes.lilac.lilac0,
-        color: palettes.lilac.lilac3,
-        borderColor: palettes.lilac.lilac0
+        backgroundColor: palettes.neutral[0],
+        color: palettes.neutral[4],
+        borderColor: palettes.neutral[0]
       },
       hover: {
-        backgroundColor: palettes.lilac.lilac2,
+        backgroundColor: palettes.neutral[2],
         color: 'white',
-        borderColor: palettes.lilac.lilac2
+        borderColor: palettes.neutral[2]
       },
       outline: {
         backgroundColor: 'transparent',
-        color: palettes.lilac.lilac1,
-        borderColor: palettes.lilac.lilac1 + '50'
+        color: palettes.neutral[3],
+        borderColor: palettes.neutral[1] + '50'
       },
       outlineHover: {
-        backgroundColor: palettes.lilac.lilac0,
-        color: palettes.lilac.lilac3,
-        borderColor: palettes.lilac.lilac2
+        backgroundColor: palettes.neutral[0],
+        color: palettes.neutral[5],
+        borderColor: palettes.neutral[2]
       }
     }
   };

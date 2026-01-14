@@ -1,7 +1,7 @@
 import React from 'react';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { PaginationState } from '../../types/library';
-import { palettes, text } from '../../theme/irisGarden';
+import { palettes, text } from '@/theme/colors';
 import { IconButton } from '../base/IconButton';
 
 interface PaginationControlsProps {
@@ -38,7 +38,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({ pagination, onP
   return (
     <div className="flex items-center justify-between mt-1 p-4 px-6 rounded-full shadow-sm"
     style={{
-      backgroundColor: palettes.grey.grey0 + '50',
+      backgroundColor: palettes.neutral[0] + '50',
     }}
     >
       <div className="flex items-center text-sm" style={{ color: text.subtle }}>
@@ -62,16 +62,16 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({ pagination, onP
             onClick={() => onPageChange(pageNum)}
             className={`w-10 h-10 rounded-full text-sm font-medium flex items-center justify-center shadow-sm ${pageNum === page ? 'cursor-not-allowed' : ''}`}
             style={{
-              backgroundColor: pageNum === page ? palettes.sage.sage2 : palettes.grey.grey1 + '20',
-              color: pageNum === page ? 'white' : palettes.sage.sage2
+              backgroundColor: pageNum === page ? palettes.secondary[2] : palettes.neutral[1] + '20',
+              color: pageNum === page ? 'white' : palettes.secondary[2]
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = palettes.sage.sage2;
+              e.currentTarget.style.backgroundColor = palettes.secondary[2];
               e.currentTarget.style.color = 'white';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = pageNum === page ? palettes.sage.sage2 : palettes.grey.grey1 + '20';
-              e.currentTarget.style.color = pageNum === page ? 'white' : palettes.sage.sage2;
+              e.currentTarget.style.backgroundColor = pageNum === page ? palettes.secondary[2] : palettes.neutral[1] + '20';
+              e.currentTarget.style.color = pageNum === page ? 'white' : palettes.secondary[2];
             }}
           >
             {pageNum}

@@ -3,137 +3,96 @@
  * A modern palette combining blues, teals, and grays for a professional look
  */
 
-// Color palette array for programmatic use
+// Full color palettes for detailed styling
 export const palettes = {
-  blue: {
-    blue0: '#E4F3FF',
-    blue1: '#90D5FF',
-    blue2: '#00B2EB',
-    blue3: '#008AB7',
-    blue4: '#006486',
-    blue5: '#004158',
-    blue6: '#00202E',
+  // Primary blue palette
+  primary: {
+    0: '#E4F3FF',
+    1: '#90D5FF',
+    2: '#00B2EB',
+    3: '#008AB7',
+    4: '#006486',
+    5: '#004158',
+    6: '#00202E',
   },
-  sky: {
-    sky0: '#BBDCFF',
-    sky1: '#57B9FF',
-    sky2: '#0093D7',
-    sky3: '#006DA1',
-    sky4: '#004A6E',
-    sky5: '#00293F',
-    sky6: '#001220',
+  // Secondary teal palette
+  secondary: {
+    0: '#E9F2F9',
+    1: '#B6D5EC',
+    2: '#77B1D4',
+    3: '#5C8AA6',
+    4: '#42657A',
+    5: '#2A4251',
+    6: '#14222B',
   },
-  teal: {
-    teal0: '#E9F2F9',
-    teal1: '#B6D5EC',
-    teal2: '#77B1D4',
-    teal3: '#5C8AA6',
-    teal4: '#42657A',
-    teal5: '#2A4251',
-    teal6: '#14222B',
+  // Neutral grey palette
+  neutral: {
+    0: '#F0F1F1',
+    1: '#CACDCF',
+    2: '#A2A6A9',
+    3: '#7E8183',
+    4: '#5B5D5F',
+    5: '#3A3C3D',
+    6: '#1C1D1E',
   },
-  dusty: {
-    dusty0: '#DAE8F4',
-    dusty1: '#97C4E4',
-    dusty2: '#6C9EBE',
-    dusty3: '#517891',
-    dusty4: '#375466',
-    dusty5: '#20333F',
-    dusty6: '#0A141A',
-  },
-  grey: {
-    grey0: '#F0F1F1',
-    grey1: '#CACDCF',
-    grey2: '#A2A6A9',
-    grey3: '#7E8183',
-    grey4: '#5B5D5F',
-    grey5: '#3A3C3D',
-    grey6: '#1C1D1E',
-  },
+  // Status colors
   danger: {
-    danger0: '#FFE6E6',
-    danger1: '#FF9999',
-    danger2: '#FF4D4D',
-    danger3: '#E60000',
-    danger4: '#B30000',
-    danger5: '#800000',
-    danger6: '#4D0000',
+    0: '#FFE6E6',
+    1: '#FF9999',
+    2: '#FF4D4D',
+    3: '#E60000',
+    4: '#B30000',
+    5: '#800000',
+    6: '#4D0000',
   },
   success: {
-    success0: '#E6F7E6',
-    success1: '#99E699',
-    success2: '#4DD94D',
-    success3: '#00CC00',
-    success4: '#009900',
-    success5: '#006600',
-    success6: '#003300',
+    0: '#E6F7E6',
+    1: '#99E699',
+    2: '#4DD94D',
+    3: '#00CC00',
+    4: '#009900',
+    5: '#006600',
+    6: '#003300',
   },
   warning: {
-    warning0: '#FFF2E6',
-    warning1: '#FFCC99',
-    warning2: '#FF994D',
-    warning3: '#FF6600',
-    warning4: '#CC5200',
-    warning5: '#993D00',
-    warning6: '#662900',
-  },
-  purple: {
-    purple0: '#F5EFF2',
-    purple1: '#DCC2CE',
-    purple2: '#C494AB',
-    purple3: '#A76A89',
-    purple4: '#794B63',
-    purple5: '#4E2F3F',
-    purple6: '#27151E',
-  },
-  green: {
-    green0: '#D5F7B5',
-    green1: '#ABD085',
-    green2: '#89A76A',
-    green3: '#688050',
-    green4: '#4A5B38',
-    green5: '#2D3921',
-    green6: '#13190C',
+    0: '#FFF2E6',
+    1: '#FFCC99',
+    2: '#FF994D',
+    3: '#FF6600',
+    4: '#CC5200',
+    5: '#993D00',
+    6: '#662900',
   },
 } as const;
 
-export const primary = {
-  blue: palettes.blue.blue2,
-  sky: palettes.sky.sky2,
-  teal: palettes.teal.teal2,
-  dusty: palettes.dusty.dusty2,
-  purple: palettes.purple.purple2,
-  green: palettes.green.green2,
-};
+// Primary colors (shade 3 - main brand colors)
+export const colors = {
+  primary: palettes.primary[3],
+  secondary: palettes.secondary[3],
+  danger: palettes.danger[3],
+  success: palettes.success[3],
+  warning: palettes.warning[3],
+} as const;
 
-export const semantic = {
-  danger: palettes.danger.danger3,
-  success: palettes.success.success3,
-  warning: palettes.warning.warning3,
-};
-
+// Text colors
 export const text = {
-  primary: palettes.grey.grey6,
-  secondary: palettes.grey.grey5,
-  subtle: palettes.grey.grey3,
-};
+  primary: palettes.neutral[6],
+  secondary: palettes.neutral[5],
+  subtle: palettes.neutral[3],
+  inverse: '#FFFFFF',
+} as const;
 
+// Background colors (lightest shades)
 export const background = {
-  blue: palettes.blue.blue0,
-  sky: palettes.sky.sky0,
-  teal: palettes.teal.teal0,
-  dusty: palettes.dusty.dusty0,
-  grey: palettes.grey.grey0,
-  purple: palettes.purple.purple0,
-  green: palettes.green.green0,
-};
+  primary: palettes.primary[0],
+  secondary: palettes.secondary[0],
+  neutral: palettes.neutral[0],
+  page: '#FFFFFF',
+} as const;
 
+// Border colors (light shades)
 export const border = {
-  blue: palettes.blue.blue1,
-  sky: palettes.sky.sky1,
-  teal: palettes.teal.teal1,
-  dusty: palettes.dusty.dusty1,
-  grey: palettes.grey.grey1,
-  purple: palettes.purple.purple1,
-  green: palettes.green.green1,
-};
+  primary: palettes.primary[1],
+  secondary: palettes.secondary[1],
+  neutral: palettes.neutral[1],
+} as const;

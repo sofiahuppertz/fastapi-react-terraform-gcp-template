@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { palettes, text } from '@/theme/irisGarden';
+import { palettes, text } from '@/theme/colors';
 import { IconButton } from '@/components/base/IconButton';
 import { CancelButton } from '../buttons/CancelButton';
 
@@ -49,8 +49,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
               placeholder={placeholder}
               className="w-full pl-9 pr-10 py-2 text-sm border rounded-full focus:outline-none transition-all"
               style={{
-                backgroundColor: palettes.grey.grey0 + '30',
-                borderColor: palettes.grey.grey1,
+                backgroundColor: palettes.neutral[0] + '30',
+                borderColor: palettes.neutral[1],
                 color: text.secondary
               }}
               autoFocus={autoFocus}
@@ -58,7 +58,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <FontAwesomeIcon 
               icon={faMagnifyingGlass} 
               className="absolute left-3 top-1/2 transform -translate-y-1/2 h-3.5 w-3.5"
-              style={{ color: palettes.grey.grey2 }}
+              style={{ color: palettes.neutral[2] }}
             />
             <div className="absolute right-1 top-1/2 transform -translate-y-1/2">
               <CancelButton

@@ -3,7 +3,7 @@ import { faArrowLeft, faDownload, faPlus } from '@fortawesome/free-solid-svg-ico
 import SlideTabNavigation, { TabItem } from '../controls/SlideTabNavigation.tsx';
 import SearchBar from '../controls/SearchBar.tsx';
 import { IconButton } from '@/components/base/IconButton';
-import { palettes } from '@/theme/irisGarden';
+import { palettes } from '@/theme/colors';
 
 
 export interface NavigationBarProps {
@@ -80,8 +80,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
     <div 
       className={`flex items-center justify-between rounded-full shadow-sm  border navbar-scroll`}
       style={{
-        backgroundColor: palettes.lilac.lilac0 + '40',
-        borderColor: palettes.lilac.lilac0 + '80',
+        backgroundColor: palettes.primary[0] + '40',
+        borderColor: palettes.primary[0] + '80',
         padding: '6px 16px',
         overflowX: 'auto',
         overflowY: 'visible'
