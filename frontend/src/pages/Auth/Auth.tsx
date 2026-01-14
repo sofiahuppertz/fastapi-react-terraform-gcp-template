@@ -4,6 +4,7 @@ import { useAuth } from '../../hooks/useAuth';
 import AuthForm from './components/AuthForm';
 import ActivationForm from './components/ActivationForm';
 import { palettes, colors, text } from '@/theme/colors';
+import { toast } from '@/components/notification/toast';
 
 // Images are in public/images/ - reference with absolute path from public root
 const landingImage = '/images/landing_page_image.webp';
@@ -39,6 +40,7 @@ const AuthPage: React.FC = () => {
     setPendingActivation(false);
     setPendingEmail(null);
     setActiveTab('login');
+    toast.success('Account activated successfully! You can now log in.');
   };
 
   const handleActivationCancel = () => {
@@ -69,7 +71,7 @@ const AuthPage: React.FC = () => {
             <img
               src={logo}
               alt="Logo"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain rounded-xl"
             />
           </div>
         </div>
@@ -164,7 +166,7 @@ const AuthPage: React.FC = () => {
             <img
               src={logo}
               alt="Logo"
-              className="h-12 w-auto object-contain opacity-50"
+              className="h-12 w-auto object-contain opacity-50 rounded-lg"
             />
           </div>
         </div>
@@ -184,7 +186,7 @@ const AuthPage: React.FC = () => {
           <img
             src={logo}
             alt="Logo"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain rounded-lg"
           />
         </div>
       </div>

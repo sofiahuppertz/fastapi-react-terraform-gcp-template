@@ -307,7 +307,7 @@ export class HttpClient {
   }
 
   public async refreshAccessToken(refreshToken: string): Promise<void> {
-    const response = await fetch(`${this.baseUrl}/api/auth/refresh`, {
+    const response = await fetch(`${this.baseUrl}/api/v1/auth/refresh`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${refreshToken}`,

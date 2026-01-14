@@ -1,5 +1,5 @@
 // Simple toast notification utility
-import { palettes } from '../config/colors.ts';
+import { palettes } from '@/theme/colors';
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info';
 
@@ -34,27 +34,27 @@ class ToastManager {
   show({ message, type = 'info', duration = 5000 }: ToastOptions): void {
     const container = this.getContainer();
     const toast = document.createElement('div');
-    
+
     const colors = {
-      success: { 
-        bg: palettes.success.success2 + '60', // 90% opacity
-        border: palettes.success.success3, 
-        text: '#ffffff' 
+      success: {
+        bg: palettes.success[4] + '60',
+        border: palettes.success[5],
+        text: '#ffffff'
       },
-      error: { 
-        bg: palettes.danger.danger2 + '60', // 90% opacity
-        border: palettes.danger.danger3, 
-        text: '#ffffff' 
+      error: {
+        bg: palettes.danger[2] + '60',
+        border: palettes.danger[3],
+        text: '#ffffff'
       },
-      warning: { 
-        bg: palettes.warning.warning2 + '60', // 90% opacity
-        border: palettes.warning.warning3, 
-        text: '#ffffff' 
+      warning: {
+        bg: palettes.warning[2] + '60',
+        border: palettes.warning[3],
+        text: '#ffffff'
       },
-      info: { 
-        bg: palettes.sky.sky2 + '60', // 90% opacity
-        border: palettes.sky.sky3, 
-        text: '#ffffff' 
+      info: {
+        bg: palettes.primary[2] + '60',
+        border: palettes.primary[3],
+        text: '#ffffff'
       },
     };
 
@@ -69,7 +69,7 @@ class ToastManager {
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      font-family: 'Courier New', monospace;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 14px;
       max-width: 400px;
       word-wrap: break-word;
@@ -145,4 +145,3 @@ class ToastManager {
 }
 
 export const toast = new ToastManager();
-

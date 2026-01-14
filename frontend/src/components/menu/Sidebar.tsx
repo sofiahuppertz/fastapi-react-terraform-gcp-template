@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
         }}>
           <div className="flex items-center justify-center group-hover:justify-start transition-all duration-300">
             <div className="h-8 w-8 bg-transparent flex items-center justify-center flex-shrink-0">
-              <img src={logo} alt="Logo" className="h-8 w-8 object-contain" />
+              <img src={logo} alt="Logo" className="h-8 w-8 object-contain rounded-lg" />
             </div>
             <span className="ml-3 font-light text-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap overflow-hidden tracking-wide" style={{
               color: text.primary,

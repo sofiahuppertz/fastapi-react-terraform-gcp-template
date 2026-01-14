@@ -18,7 +18,7 @@ export class AuthClient {
   private httpClient: HttpClient;
 
   constructor() {
-    this.httpClient = new HttpClient(`${import.meta.env.VITE_API_BASE_URL}/api/auth`);
+    this.httpClient = new HttpClient(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth`);
   }
 
   public async login(credentials: LoginFormData): Promise<LoginResponse> {

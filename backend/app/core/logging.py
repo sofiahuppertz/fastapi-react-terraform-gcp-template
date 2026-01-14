@@ -34,14 +34,17 @@ class JSONFormatter(logging.Formatter):
 
         return json.dumps(log_data)
 
-def setup_logging(level: Optional[str] = None) -> None:
+def setup_logging() -> None:
+    log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+    level = getattr(logging, log_level, logging.INFO)
+
     is_gcp = os.getenv("K_SERVICE")
     if is_gcp:
         try:
             import google.cloud.logging
             client = google.cloud.logging.Client()
             client.setup_logging()
-            logger.info(json.dumps({"message": "Google Cloud Logging initialized successfully"}))     
+            logger.info(json.dumps({"message": "Google Cloud Logging initialized successfully"}))
         except Exception as e:
             logger.error(json.dumps({"message": "Failed to initialize Google Cloud Logging", "error": str(e)}))
     else:
@@ -49,7 +52,7 @@ def setup_logging(level: Optional[str] = None) -> None:
         handler = logging.StreamHandler()
         handler.setFormatter(JSONFormatter())
         logger.addHandler(handler)
-        logger.setLevel(level or logging.INFO)
+        logger.setLevel(level)
 
 setup_logging()
 

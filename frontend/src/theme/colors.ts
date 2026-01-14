@@ -1,67 +1,70 @@
 /**
- * Blue Teal Color Palette
- * A modern palette combining blues, teals, and grays for a professional look
+ * Pink & Teal Color Palette
+ * A vibrant palette with pink, teal, and natural tones
  */
 
 // Full color palettes for detailed styling
 export const palettes = {
-  // Primary blue palette
+  // Primary pink palette
   primary: {
-    0: '#E4F3FF',
-    1: '#90D5FF',
-    2: '#00B2EB',
-    3: '#008AB7',
-    4: '#006486',
-    5: '#004158',
-    6: '#00202E',
+      0: '#D7F9E6',
+      1: '#92E4BA',
+      2: '#78BA97',
+      3: '#5B9176',
+      4: '#428B56',
+      5: '#2A4738',
+      6: '#14251C',
   },
   // Secondary teal palette
   secondary: {
-    0: '#E9F2F9',
-    1: '#B6D5EC',
-    2: '#77B1D4',
-    3: '#5C8AA6',
-    4: '#42657A',
-    5: '#2A4251',
-    6: '#14222B',
+      0: '#FAEEF0',
+      1: '#EFC5CF',
+      2: '#E491A8',
+      3: '#DB537E',
+      4: '#A23B5C',
+      5: '#6C253C',
+      6: '#3B101E',
   },
-  // Neutral grey palette
+
+  // Neutral gray palette
   neutral: {
-    0: '#F0F1F1',
-    1: '#CACDCF',
-    2: '#A2A6A9',
-    3: '#7E8183',
-    4: '#5B5D5F',
-    5: '#3A3C3D',
-    6: '#1C1D1E',
+    0: '#F1F0F1',
+    1: '#D2CFCF',
+    2: '#AEA7A8',
+    3: '#8C8082',
+    4: '#675D5F',
+    5: '#433D3D',
+    6: '#221E1F',
   },
-  // Status colors
+  // Status colors - danger (pink-based)
   danger: {
-    0: '#FFE6E6',
-    1: '#FF9999',
-    2: '#FF4D4D',
-    3: '#E60000',
-    4: '#B30000',
-    5: '#800000',
-    6: '#4D0000',
+    0: '#FDD0D0', // Lightest danger (backgrounds, subtle alerts)
+    1: '#FB9899',
+    2: '#FA5053',
+    3: '#D0161E', // Classic danger red (errors, main alerts)
+    4: '#910C11',
+    5: '#560406',
+    6:'#2C0102',
   },
+  // Status colors - success (green)
   success: {
-    0: '#E6F7E6',
-    1: '#99E699',
-    2: '#4DD94D',
-    3: '#00CC00',
-    4: '#009900',
-    5: '#006600',
-    6: '#003300',
+    0: '#D5FADF', // Lightest success (success backgrounds, highlights)
+    1: '#80DC9D',
+    2: '#66B27E',
+    3: '#4E8960', // Main success green (icons, text, alerts)
+    4: '#366344',
+    5: '#213F2A',
+    6: '#0D1E12',
   },
+  // Status colors - warning (mauve)
   warning: {
-    0: '#FFF2E6',
-    1: '#FFCC99',
-    2: '#FF994D',
-    3: '#FF6600',
-    4: '#CC5200',
-    5: '#993D00',
-    6: '#662900',
+    0: '#FEEEDB', // Lightest warning (backgrounds, subtle highlights)
+    1: '#FECD7A',
+    2: '#DAA520', // Standard warning yellow (alerts, icons)
+    3: '#AB8117',
+    4: '#7F5F0E',
+    5: '#553E06',
+    6: '#2F2102',
   },
 } as const;
 

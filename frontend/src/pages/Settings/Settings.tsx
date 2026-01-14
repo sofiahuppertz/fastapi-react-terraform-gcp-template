@@ -5,6 +5,7 @@ import { text, palettes, colors } from '@/theme/colors';
 import { authClient } from '../../services/auth/authClient';
 import Breadcrumb from '../../components/controls/Breadcrumb';
 import { useError } from '@/hooks/useError';
+import { validatePassword, validatePasswordMatch, PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH } from '@/utils/validation';
 
 export function Settings() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -20,10 +21,10 @@ export function Settings() {
     if (!currentPassword.trim() || !newPassword.trim() || !confirmPassword.trim()) {
       return false;
     }
-    if (newPassword.length < 8 || newPassword.length > 72) {
+    if (!validatePassword(newPassword).isValid) {
       return false;
     }
-    if (newPassword !== confirmPassword) {
+    if (!validatePasswordMatch(newPassword, confirmPassword).isValid) {
       return false;
     }
     return true;
@@ -165,10 +166,10 @@ export function Settings() {
                     e.currentTarget.style.borderColor = palettes.primary[1];
                     e.currentTarget.style.boxShadow = 'none';
                   }}
-                  placeholder="Enter new password (8-72 characters)"
+                  placeholder={`Enter new password (${PASSWORD_MIN_LENGTH}-${PASSWORD_MAX_LENGTH} characters)`}
                   required
-                  minLength={8}
-                  maxLength={72}
+                  minLength={PASSWORD_MIN_LENGTH}
+                  maxLength={PASSWORD_MAX_LENGTH}
                   disabled={submitting}
                   autoComplete="new-password"
                 />
@@ -182,7 +183,7 @@ export function Settings() {
                 </button>
               </div>
               <p className="text-xs mt-1" style={{ color: text.subtle }}>
-                Password must be between 8 and 72 characters
+                Password must be between {PASSWORD_MIN_LENGTH} and {PASSWORD_MAX_LENGTH} characters
               </p>
             </div>
 

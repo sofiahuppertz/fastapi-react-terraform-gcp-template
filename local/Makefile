@@ -1,4 +1,4 @@
-.PHONY: help install dev build up down re logs shell db-upgrade db-downgrade db-revision clean
+Re.PHONY: help install dev build up down re logs shell db-upgrade db-downgrade db-revision clean
 
 # Default target
 help:
