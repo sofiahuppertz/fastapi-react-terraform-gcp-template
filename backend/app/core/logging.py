@@ -3,11 +3,14 @@ import logging
 import json
 from typing import Optional, Any, Dict
 
+from app.core.context import get_correlation_id
+
 logger = logging.getLogger("your_project")
+
 
 class JSONFormatter(logging.Formatter):
     """Custom JSON formatter for structured logging"""
-    
+
     def format(self, record: logging.LogRecord) -> str:
         log_data: Dict[str, Any] = {
             "timestamp": self.formatTime(record, self.datefmt),
@@ -15,15 +18,20 @@ class JSONFormatter(logging.Formatter):
             "logger": record.name,
             "message": record.getMessage(),
         }
-        
+
+        # Add correlation ID if present in context
+        correlation_id = get_correlation_id()
+        if correlation_id:
+            log_data["correlation_id"] = correlation_id
+
         # Add extra fields if present
         if hasattr(record, "extra_data"):
             log_data.update(record.extra_data)
-        
+
         # Add exception info if present
         if record.exc_info:
             log_data["exception"] = self.formatException(record.exc_info)
-        
+
         return json.dumps(log_data)
 
 def setup_logging(level: Optional[str] = None) -> None:

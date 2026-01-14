@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 
 # Public controllers
-from app.controllers.auth.auth_controller import auth_router
+from app.controllers.auth.auth import auth_router
 
-public_router = APIRouter(prefix="/api")
+public_router = APIRouter(prefix="/api/v1")
 
 # Authentication (register/login/refresh/me/activate)
 public_router.include_router(

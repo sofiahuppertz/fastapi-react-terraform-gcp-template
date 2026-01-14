@@ -50,10 +50,10 @@ up:
 down:
 	docker-compose down
 
-# Restart all services
+# Restart all services (with rebuild)
 re:
 	docker-compose down
-	docker-compose up -d
+	docker-compose up -d --build
 
 # Force rebuild and restart
 re-build:

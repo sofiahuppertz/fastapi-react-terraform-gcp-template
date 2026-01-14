@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useRef } from 'react';
 import { authService } from '../services';
-import { toast } from '../utils/toast';
+import { toast } from '../components/toast/toast.ts';
 
 interface AuthContextType {
   isAuthenticated: boolean;

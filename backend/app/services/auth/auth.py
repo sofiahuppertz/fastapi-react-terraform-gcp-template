@@ -1,8 +1,11 @@
+from datetime import datetime
+
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from uuid import UUID
 
 from app.core.auth import Auth
+from app.models.user import User
 
 from app.exceptions.database import ConflictError, NotFoundError
 from app.repositories.user import UserRepo
@@ -50,7 +53,9 @@ class AuthService:
         user = user_repo.get(email=email)
         if not user or not self.auth.verify_password(password, user.password):
             return None
+        user_repo.update(user.id, last_connected_at=datetime.now())
         return user
+
 
     def create_user(self, db: Session, user_data: UserCreate):
         """Create a new user (only superusers can do this)."""

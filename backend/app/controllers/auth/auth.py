@@ -11,10 +11,10 @@ from app.schemas.controller.login.login_response import LoginResponse
 from app.schemas.controller.login.refresh_response import RefreshResponse
 from app.schemas.controller.login.password_update_request import PasswordUpdateRequest
 from app.schemas.controller.login.password_update_response import PasswordUpdateResponse
-from app.services.login.login_service import LoginService
+from app.services.auth.auth import AuthService
 
 auth_router = APIRouter()
-auth_service = LoginService()
+auth_service = AuthService()
 
 @auth_router.post("/login", response_model=LoginResponse)
 async def login(
@@ -26,7 +26,6 @@ async def login(
     if not user:
         raise AuthError("Incorrect email or password")
     response = auth_service.create_tokens(db, user.id)
-    auth_service.update_last_connected(db, user)
     return response
 
 
